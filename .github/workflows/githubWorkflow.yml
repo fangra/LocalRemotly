@@ -14,8 +14,10 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
-      - name: Auth with the DevHub
-        run: 'sfdx force:auth:jwt:grant --clientid "3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq" --jwtkeyfile  server3.key --username "meri.wa@gmail.com" -a ConnectedYAML -d'
+      - name: Create the key
+        run: |
+              echo "${{ secrets.WF_KEY }}" > server3.key
+              sfdx force:auth:jwt:grant --clientid ${{ secrets.WF_TOKEN }} --jwtkeyfile  server3.key --username "meri.wa@gmail.com" -a ConnectedYAML -d 
       - name: Create scratch org
         run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
       - name: Password generation
