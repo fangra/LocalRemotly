@@ -14,8 +14,11 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
+ # Runs a set of commands using the runners shell
+      - name: 'Decrypt file'
+        run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server3.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
       - name: Create the key & authorise dev Hub
-        run: 'sfdx force:auth:jwt:grant --clientid=${{ secrets.WF_TOKEN }} --jwtkeyfile  server3.key --username "meri.wa@gmail.com" -a ConnectedYAML -d'
+        run: 'sfdx force:auth:jwt:grant --clientid "3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq" --jwtkeyfile  server3.key --username meri.wa@gmail.com -a ConnectedYAML -d'
       - name: Create scratch org
         run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
       - name: Password generation !
