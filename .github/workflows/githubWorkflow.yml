@@ -16,7 +16,7 @@ jobs:
           ./sfdx-cli/install
       - name: Create the key & authorise dev Hub
         run: |
-              echo ${WF_KEY} > server3.key
+              echo "${WF_KEY}" > server3.key
               sfdx force:auth:jwt:grant --clientid ${{ secrets.WF_TOKEN }} --jwtkeyfile  server3.key --username "meri.wa@gmail.com" -a ConnectedYAML -d
         env:
           WF_KEY: ${{ secrets.WF_KEY }}      
