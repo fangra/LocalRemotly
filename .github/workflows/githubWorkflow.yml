@@ -15,12 +15,11 @@ jobs:
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
       - name: Create the key
-        id: key
         run: |
               echo "${WF_KEY}" > server3.key
               sfdx force:auth:jwt:grant --clientid ${{ secrets.WF_TOKEN }} --jwtkeyfile  server3.key --username "meri.wa@gmail.com" -a ConnectedYAML -d 
         env:
-        WF_KEY: ${{ secrets.WF_KEY }}
+          WF_KEY: ${{ secrets.WF_KEY }}      
       - name: Create scratch org
         run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
       - name: Password generation !
