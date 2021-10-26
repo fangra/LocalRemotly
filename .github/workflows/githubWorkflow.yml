@@ -20,7 +20,7 @@ jobs:
               sfdx force:auth:jwt:grant --clientid ${{ secrets.WF_TOKEN }} --jwtkeyfile  server3.key --username "meri.wa@gmail.com" -a ConnectedYAML -d 
       - name: Create scratch org
         run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
-      - name: Password generation
+      - name: Password generation !
         run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
       - name: Push source
