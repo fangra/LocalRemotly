@@ -1,6 +1,6 @@
 public class firstClass {
 
     public static void getDebug(){
-        system.debug('deplrefoy');
+        system.debug('deploy');
     }
 }
