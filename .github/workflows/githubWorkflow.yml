@@ -76,4 +76,4 @@ jobs:
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run deploy'
         if: github.event.pull_request.merged == true
-        run: "sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests -u hub-org"
+        run: "sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests -u hub-org"
