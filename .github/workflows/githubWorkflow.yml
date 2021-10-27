@@ -64,7 +64,7 @@ jobs:
         with:
           msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
         env:
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.token }}
       - name: 'Merge actual branch into master'
         run: ""
       - name: 'Convert Metadata'
