@@ -70,7 +70,7 @@ jobs:
           owner: tukasz
           repo: direct-merge-action
           source-branch: master
-          target-branch: TestMerged
+          target-branch: DEV
           commit-message: "Merged"
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
