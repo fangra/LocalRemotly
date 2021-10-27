@@ -50,7 +50,7 @@ jobs:
         env:
           orgCreateResult: ${{ steps.out-cache.outputs.orgCreateResult}}
       - name: Merge staging -> uat
-        uses: .github/workflows/devmasx/merge-branch-master@master
+        uses: devmasx/merge-branch-master@master
         with:
           type: now
           from_branch: TestMerged
