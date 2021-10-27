@@ -1,6 +1,6 @@
 public class firstClass {
 
     public static void getDebug(){
-        system.debug('little girl !');
+        system.debug('little girl 2!');
     }
 }
