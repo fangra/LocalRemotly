@@ -30,9 +30,13 @@ jobs:
       #- name: Password generation !
        # run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
-      - name: Push source
-        run: "sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests -u hub-org"
+      #- name: Push source
       #  run: "sfdx force:source:push -u hub-org"
+      - name: 'Convert Metadata'
+        run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
+      - name: 'Run deploy'
+        if: github.event.pull_request.merged == true
+        run: "sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests -u hub-org"
       - name: List orgs
         run: "sfdx force:org:list"
         # run tests 
