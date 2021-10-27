@@ -50,6 +50,16 @@ jobs:
           msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          #comment Pull
+      - name: Merge actual branch into master
+        uses: tukasz/direct-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          owner: tukasz
+          repo: direct-merge-action
+          source-branch: master
+          target-branch: BranchDev
+          commit-message: "Merged"
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run deploy'
