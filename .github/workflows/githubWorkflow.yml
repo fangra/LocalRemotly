@@ -74,6 +74,9 @@ jobs:
        # if: "github.event.pull_request.merged == true"
        # run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run deploy success'
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+        run: echo "PR was merged!"
+      - name: 'Run deploy success'
         run: "sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests -u hub-org"
       - name: 'Run Deployement Report success'
         run: "sfdx force:mdapi:deploy:report -u  hub-org --verbose"
