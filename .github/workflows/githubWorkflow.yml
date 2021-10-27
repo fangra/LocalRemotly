@@ -69,8 +69,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           owner: tukasz
           repo: direct-merge-action
-          source-branch: master
-          target-branch: DEV
+          source-branch: DEV
+          target-branch: master
           commit-message: "Merged"
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
