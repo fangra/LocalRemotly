@@ -21,7 +21,7 @@ jobs:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
          DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
       - name: Create the key & authorise dev Hub
-        run: 'sfdx force:auth:jwt:grant --clientid=$CONSUMER_KEY --username=$USERNAME --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
+        run: 'sfdx force:auth:jwt:grant --clientid="3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq"  --username="meri.wa@gmail.com" --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
