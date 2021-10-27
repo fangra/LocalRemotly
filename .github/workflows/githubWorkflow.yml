@@ -16,9 +16,15 @@ jobs:
           ./sfdx-cli/install
        # Runs a set of commands using the runners shell
       - name: 'Decrypt file'
-        run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server3.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
+        run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server3.key -base64 -K ${DECRYPTION_KEY} -iv ${DECRYPTION_IV}
+        env:
+         DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
+         DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
       - name: Create the key & authorise dev Hub
         run: 'sfdx force:auth:jwt:grant --clientid=${{ secrets.CONSUMER_KEY }} --username=${{ secrets.USERNAME }} --jwtkeyfile server3.key --setdefaultdevhubusername --setalias=hub-org'
+        env:
+         CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+         USERNAME: ${{ secrets.USERNAME }}
       - name: Create scratch org
         run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
       - name: Password generation !
