@@ -1,6 +1,6 @@
 public class firstClass {
 
     public static void getDebug(){
-        system.debug('debugging 2');
+        system.debug('debugging 3');
     }
 }
