@@ -51,6 +51,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Convert Metadata'
-        run: sfdx force:source:convert --rootdir=force-app --outputdir=convert
+        run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run deploy'
-        run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests -u hub-org 
+        run: "sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests -u hub-org"
