@@ -59,7 +59,7 @@ jobs:
         with:
           msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
         env:
-          github_token: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
       - name: 'Run Merge'
         uses: devmasx/merge-branch@master
         with:
