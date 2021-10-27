@@ -68,7 +68,9 @@ jobs:
           target_branch: master
           github_token: ${{ github.token }}
       - name: 'Convert Metadata'
-        run: echo "github.event.pull_request.merged"
+        if: github.action == 'closed' && github.pull_request.merged == 'true'
+        run: echo merged
+
        # if: "github.event.pull_request.merged == true"
        # run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run deploy success'
