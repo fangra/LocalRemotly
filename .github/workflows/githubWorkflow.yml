@@ -55,7 +55,7 @@ jobs:
           type: now
           from_branch: TestMerged
           target_branch: master
-          github_token: ${{ secrets.TOKEN  }}
+          github_token: ${{ github.token }}
       #comment Pull
       - name: 'Comment on pull request'
         uses: unsplash/comment-on-pr@master
