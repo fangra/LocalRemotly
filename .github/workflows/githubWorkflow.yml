@@ -49,7 +49,7 @@ jobs:
         with:
           msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run deploy'
