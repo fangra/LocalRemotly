@@ -1,8 +1,8 @@
 name: "sfdx"
 
-on:
-  pull_request:
-        branches: [master,Merged]
+on: push
+  #pull_request:
+   #     branches: [master,Merged]
 
 jobs:
   build:
