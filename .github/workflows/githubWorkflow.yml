@@ -53,7 +53,7 @@ jobs:
           echo ::set-output name=parameters::'/secur/frontdoor.jsp?sid='
         env:
           orgCreateResult: ${{ steps.out-cache.outputs.orgCreateResult}}
-      - name: 'Merge staging -> uat'
+      - name: 'Run Merge'
         uses: devmasx/merge-branch@master
         with:
           type: now
