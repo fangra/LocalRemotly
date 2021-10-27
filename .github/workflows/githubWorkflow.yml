@@ -1,6 +1,6 @@
 name: "sfdx"
 
-on: push
+on: pull_request
 
 jobs:
   build:
@@ -62,7 +62,7 @@ jobs:
         with:
           msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          github_token: ${{ github.token }}
       - name: 'Merge actual branch into master'
         run: ""
       - name: 'Convert Metadata'
