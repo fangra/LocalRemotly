@@ -56,12 +56,12 @@ jobs:
         env:
           orgCreateResult: ${{ steps.out-cache.outputs.orgCreateResult}}
       #comment Pull
-      - name: comment on pull request
-        uses: unsplash/comment-on-pr@master
-        with:
-          msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+  #    - name: comment on pull request
+   #     uses: unsplash/comment-on-pr@master
+      #  with:
+     #     msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
+       # env:
+        #  GITHUB_TOKEN: ${{ secrets.TOKEN }}
           #comment Pull
       - name: Merge actual branch into master
         uses: tukasz/direct-merge-action@master
@@ -70,7 +70,7 @@ jobs:
           owner: tukasz
           repo: direct-merge-action
           source-branch: master
-          target-branch: BranchDev
+          target-branch: TestMerged
           commit-message: "Merged"
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
