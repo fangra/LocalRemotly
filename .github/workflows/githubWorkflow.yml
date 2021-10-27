@@ -72,10 +72,12 @@ jobs:
           echo "github.event.pull_request.merged           : $MERGED_RAW"
           echo "github.event.pull_request.merged == 'true' : $MERGED_TRUE_STR"
           echo "github.event.pull_request.merged  == true  : $MERGED_TRUE_BOOL"
+          echo "github.action ==closed                     : $MERGED_CLOSED"
         env:
           MERGED_RAW: ${{ github.event.pull_request.merged }}
           MERGED_TRUE_STR: ${{ github.event.pull_request.merged == 'true' }}
           MERGED_TRUE_BOOL: ${{ github.event.pull_request.merged == true }}
+          MERGED_CLOSED: ${{ github.action }}
       - name: 'Convert Metadata'
         if: github.action == 'closed' && github.pull_request.merged == 'true'
         run: echo merged
