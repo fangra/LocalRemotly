@@ -1,0 +1,76 @@
+name: "sfdx"
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Salesforce CLI
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+          mkdir sfdx-cli
+          tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
+          ./sfdx-cli/install
+       # Runs a set of commands using the runners shell
+      - name: 'Decrypt file'
+        run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K  "E5E9FA1BA31ECD1AE84F75CAAA474F3A663F05F412028F81DA65D26EE56424B2" -iv "E93DA465B309C53FEC5FF93C9637DA58^C"
+        env:
+         DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
+         DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
+      - name: Create the key & authorise dev Hub
+        run: 'sfdx force:auth:jwt:grant --clientid="3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq"  --username="meri.wa@gmail.com" --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
+        env:
+         CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+         USERNAME: ${{ secrets.USERNAME }}
+      #- name: Create scratch org
+        #run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
+      #- name: Password generation !
+       # run: "sfdx force:user:password:generate --targetusername soenv"
+        # push source into scratch org
+      #- name: Push source
+      #  run: "sfdx force:source:push -u hub-org"
+      - name: List orgs
+        run: "sfdx force:org:list"
+        # run tests 
+      - name: Run tests
+        run: "sfdx force:apex:test:run -u hub-org --resultformat human"
+      - name: Get scratch Org URL
+        id: out-cache
+        run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
+        # get URL and params of scratch org
+      - name: Get Scratch URL
+        id: params
+        run: |
+          echo ::set-output name=instanceURL::$(echo $orgCreateResult | jq -r .result.instanceUrl)
+          echo ::set-output name=accessToken::$(echo $orgCreateResult | jq -r .result.accessToken)
+          echo ::set-output name=parameters::'/secur/frontdoor.jsp?sid='
+        env:
+          orgCreateResult: ${{ steps.out-cache.outputs.orgCreateResult}}
+      - name: Merge staging -> uat
+        uses: .github/workflows/devmasx/merge-branch-master@master
+        with:
+          type: now
+          from_branch: TestMerged
+          target_branch: master
+          github_token: ${{ secrets.TOKEN  }}
+      #comment Pull
+      - name: comment on pull request
+        uses: unsplash/comment-on-pr@master
+        with:
+          msg: ${{steps.params.outputs.instanceURL}}${{steps.params.outputs.parameters}}${{steps.params.outputs.accessToken}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Merge actual branch into master
+        run: ""
+      - name: 'Convert Metadata'
+        run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
+      - name: 'Run deploy'
+        if: github.event.pull_request.merged == true
+        run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
+      - name: 'Run deploy'
+        run: "sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests -u hub-org"
+      - name: 'Run Deployement Report'
+        run: "sfdx force:mdapi:deploy:report -u  hub-org --verbose"
