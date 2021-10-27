@@ -41,7 +41,7 @@ jobs:
         run: "sfdx force:org:list"
         # run tests 
       - name: Run tests
-        run: "sfdx force:apex:test:run -u soenv --resultformat human"
+        run: "sfdx force:apex:test:run -u hub-org --resultformat human"
       - name: Get scratch Org URL
         id: out-cache
         run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
