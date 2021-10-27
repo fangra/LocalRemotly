@@ -53,7 +53,7 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: TestMerged
+          from_branch: Merged
           target_branch: master
           github_token: ${{ github.token }}
       #comment Pull
