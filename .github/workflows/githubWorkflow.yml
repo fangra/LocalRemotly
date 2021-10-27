@@ -67,6 +67,15 @@ jobs:
           from_branch: Merged
           target_branch: master
           github_token: ${{ github.token }}
+      - name: Checking your input
+        run: |
+          echo "github.event.pull_request.merged           : $MERGED_RAW"
+          echo "github.event.pull_request.merged == 'true' : $MERGED_TRUE_STR"
+          echo "github.event.pull_request.merged  == true  : $MERGED_TRUE_BOOL"
+        env:
+          MERGED_RAW: ${{ github.event.pull_request.merged }}
+          MERGED_TRUE_STR: ${{ github.event.pull_request.merged == 'true' }}
+          MERGED_TRUE_BOOL: ${{ github.event.pull_request.merged == true }}
       - name: 'Convert Metadata'
         if: github.action == 'closed' && github.pull_request.merged == 'true'
         run: echo merged
