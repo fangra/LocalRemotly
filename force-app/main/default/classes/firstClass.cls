@@ -1,6 +1,7 @@
 public class firstClass {
 
-    public static void getDebug(){
-        system.debug('little girl 2!');
+    public static Decimal FahrenheitToCelsius(Decimal fh) {
+        Decimal cs = (fh - 32) * 5/9;
+        return cs.setScale(2);
     }
 }
