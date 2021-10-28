@@ -20,13 +20,14 @@ jobs:
        # Runs a set of commands using the runners shell
       - name: 'Decrypt file'
      #   run: openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K  "E5E9FA1BA31ECD1AE84F75CAAA474F3A663F05F412028F81DA65D26EE56424B2" -iv "E93DA465B309C53FEC5FF93C9637DA58^C"
+        env:
+         DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
+         DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
         run: |
          echo "DECRYPTION_KEY :"
          echo ${{ secrets.DECRYPTION_KEY }}
          openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K  -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
-        env:
-         DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
-         DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
+
       - name: 'Create the key & authorise dev Hub'
         run: 'sfdx force:auth:jwt:grant --clientid="3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq"  --username=meri.wa@gmail.com --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
         env:
