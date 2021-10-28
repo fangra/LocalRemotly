@@ -27,7 +27,7 @@ jobs:
          echo "DECRYPTION_KEY :"
          echo ${{ secrets.DECRYPTION_KEY }}
          echo ${{ secrets.DECRYPTION_KEY }} | sed 's/./& /g'
-         openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K  -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
+         openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K ${{secrets.DECRYPTION_KEY}} -iv ${{secrets.DECRYPTION_IV}}
 
       - name: 'Create the key & authorise dev Hub'
         run: 'sfdx force:auth:jwt:grant --clientid="3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq"  --username=meri.wa@gmail.com --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
