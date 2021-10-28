@@ -27,16 +27,17 @@ jobs:
          echo "DECRYPTION_KEY :"
          echo ${{ secrets.DECRYPTION_KEY }}
          openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-
       - name: 'Create the key & authorise dev Hub'
         run: 'sfdx force:auth:jwt:grant --clientid=$CONSUMER_KEY  --username=$USERNAME --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
-      - name: Create scratch org
-        run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
-      - name: Password generation !
-        run: "sfdx force:user:password:generate --targetusername soenv"
+      - name: Log Into scratch org
+        run: "sfdx force:org:open -u test-klmsa3z8q0wq@example.com"   
+    #  - name: Create scratch org
+     #   run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
+    #  - name: Password generation !
+       # run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
       - name: Push source
         run: "sfdx force:source:push -u soenv"
