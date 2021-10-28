@@ -33,7 +33,7 @@ jobs:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
       - name: Log Into scratch org
-        run: "sfdx force:org:open -u test-klmsa3z8q0wq@example.com"   
+        run: "sfdx force:org:open -u test-kyltolb6tkna@example.com"   
     #  - name: Create scratch org
      #   run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
     #  - name: Password generation !
