@@ -1,11 +1,6 @@
 name: "sfdx"
 
-on:
-  workflow_call:
-    secrets:
-      DECRYPTION_KEY:
-        description: 'A key passed from the caller workflow'
-        required: false
+on: push
   #pull_request:
    # branches:
     #- master
