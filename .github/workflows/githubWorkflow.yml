@@ -86,4 +86,4 @@ jobs:
       - name: 'Run Deployement Report success'
         run: "sfdx force:mdapi:deploy:report -u  hub-org --verbose > file.docx"
       - name: 'Delete the scratch org'
-        run: "sfdx force:org:delete -u soenv"
+        run: "sfdx force:org:delete -p -u soenv"
