@@ -1,9 +1,9 @@
 name: "sfdx"
 
-on:
-  pull_request:
-    branches:
-    - master
+on: push
+  #pull_request:
+   #branches:
+ # - master
 
 jobs:
   build:
@@ -43,7 +43,7 @@ jobs:
         run: "sfdx force:org:list"
         # run tests 
       - name: 'Run tests'
-        run: "sfdx force:apex:test:run -u soenv --resultformat human"
+        run: "sfdx force:apex:test:run -u soenv —codecoverage --detailedcoverage --resultformat human"
       - name: 'Get scratch Org URL'
         id: out-cache
         run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
