@@ -70,13 +70,13 @@ jobs:
           from_branch: Merged
           target_branch: master
           github_token: ${{ github.token }}
-      - name: Checking your input
-        run: |
-          echo "github.event.pull_request.merged           : $MERGED_RAW"
-          echo "github.action ==closed                     : $MERGED_CLOSED"
-        env:
-          MERGED_RAW: ${{ github.event.pull_request.merged }}
-          MERGED_CLOSED: ${{ github.action }}
+    #  - name: Checking your input
+    #    run: |
+      #    echo "github.event.pull_request.merged           : $MERGED_RAW"
+       #   echo "github.action ==closed                     : $MERGED_CLOSED"
+       # env:
+       #   MERGED_RAW: ${{ github.event.pull_request.merged }}
+       #   MERGED_CLOSED: ${{ github.action }}
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
       - name: 'Run Test on Metadata'
