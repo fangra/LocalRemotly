@@ -24,7 +24,7 @@ jobs:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
          DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
         run: |
-         echo $GITHUB_BASE_REF
+ 
          echo "DECRYPTION_KEY "
          echo ${{ secrets.DECRYPTION_KEY }}
          openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
@@ -70,7 +70,7 @@ jobs:
         with:
           type: now
           from_branch: $GITHUB_HEAD_REF
-          target_branch: master
+          target_branch: $GITHUB_BASE_REF
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
