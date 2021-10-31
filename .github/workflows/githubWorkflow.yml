@@ -24,7 +24,7 @@ jobs:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
          DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
         run: |
-         echo "DECRYPTION_KEY : GITHUB_HEAD_REF"
+         echo "DECRYPTION_KEY : $GITHUB_HEAD_REF"
          echo ${{ secrets.DECRYPTION_KEY }}
          openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
       - name: 'Create the key & authorise dev Hub'
