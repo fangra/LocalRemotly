@@ -46,9 +46,9 @@ jobs:
       - name: 'Run tests'
         run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
         #Run the PMD APEX
-      - uses: sfdx-actions/setup-pmd@v1
-      - name: run-pmd
-        run: pmd -d ./force-app/main/default/classes -R "category/apex/design.xml" -reportfile "C:\ApexPMD\output.html"
+     # - uses: sfdx-actions/setup-pmd@v1
+     # - name: run-pmd
+    #    run: pmd -d ./force-app/main/default/classes -R "category/apex/design.xml" -reportfile "C:\ApexPMD\output.html"
       - name: 'Get scratch Org URL'
         id: out-cache
         run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
@@ -75,8 +75,8 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: $GITHUB_HEAD_REF
-          target_branch: $GITHUB_BASE_REF
+          from_branch: Integration
+          target_branch: master
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
