@@ -28,7 +28,7 @@ jobs:
          echo "DECRYPTION_KEY "
          echo ${{ secrets.DECRYPTION_KEY }}
          openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-      - name: 'Create the key & authorise dev Hub'
+      - name: 'Authorise dev Hub'
         run: 'sfdx force:auth:jwt:grant --clientid=$CONSUMER_KEY  --username=$USERNAME --jwtkeyfile server.key --setdefaultdevhubusername --setalias=hub-org'
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
