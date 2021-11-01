@@ -19,7 +19,7 @@ jobs:
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
        # Runs a set of commands using the runners shell
-      - name: 'Decrypt file'
+      - name: 'Decrypt server file'
         env:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
          DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
