@@ -46,9 +46,9 @@ jobs:
       - name: 'Run tests'
         run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
         #Run the PMD APEX
-     # - uses: sfdx-actions/setup-pmd@v1
-     # - name: run-pmd
-    #    run: pmd -d ./force-app/main/default/classes -R category/apex/design.xml -l apex -f text
+      - uses: sfdx-actions/setup-pmd@v1
+      - name: run-pmd
+        run: pmd -d ./force-app/main/default/classes -R category/apex/design.xml -l apex -f text
       - name: 'Get scratch Org URL'
         id: out-cache
         run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
