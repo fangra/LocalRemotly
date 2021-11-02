@@ -42,6 +42,10 @@ jobs:
         run: "sfdx force:source:push -u soenv"
       - name: 'List orgs'
         run: "sfdx force:org:list"
+        # Run PMD
+      - uses: setup-pmd-master/sfdx-actions/setup-pmd@v1
+      - name: run-pmd
+        run: pmd -d ./force-app/main/default/classes -R category/apex/design.xml -f text
         # run tests 
       - name: 'Run tests'
         run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
