@@ -46,7 +46,7 @@ jobs:
       - name: Run PMD Analysis on Files Changed
         id: pmd-partial-analysis
         if: github.event.pull_request != null
-        uses: synergy-au/pmd-analyser-action@master
+        uses: synergy-au/pmd-analyser-action@v2
         with:
           pmd-version: 'latest'
           file-path: './force-app/main/default'
