@@ -1,1 +1,12 @@
+name: "Org Preparation"
 
+on: create
+
+jobs:
+  build:
+    environment: WF_ENV  # the enviroment variable, with the secrets. 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Initialisation'
+      - run: echo Initialisation...
