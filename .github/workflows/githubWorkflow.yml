@@ -45,7 +45,7 @@ jobs:
         #PMD Analysis
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pmd -d "./force-app/main/default/classes" -R ".github/workflows//ruleset.xml" -f text
+        run: pmd -d "./force-app/main/default/classes" -R ".github/workflows/ruleset.xml" -f text
         # run tests 
       - name: 'Run tests'
         run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
