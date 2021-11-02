@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+        #PMD Analysis
+      - uses: sfdx-actions/setup-pmd@v1
+      - name: 'Review Source Code'
+        run: pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text
       - uses: actions/checkout@v2
       - name: 'Install Salesforce CLI'
         run: |
@@ -24,7 +28,6 @@ jobs:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
          DECRYPTION_IV: ${{ secrets.DECRYPTION_IV }}
         run: |
- 
          echo "DECRYPTION_KEY "
          echo ${{ secrets.DECRYPTION_KEY }}
          openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
@@ -33,19 +36,15 @@ jobs:
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
-    #  - name: Create scratch org
-    #    run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
-    #  - name: Password generation !
-    #    run: "sfdx force:user:password:generate --targetusername soenv"
+      - name: Create scratch org
+        run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
+      - name: Password generation !
+        run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
-   #   - name: Push source
-   #     run: "sfdx force:source:push -u hub-org"
+      - name: Push source
+        run: "sfdx force:source:push -u hub-org"
       - name: 'List orgs'
         run: "sfdx force:org:list"
-        #PMD Analysis
-      - uses: sfdx-actions/setup-pmd@v1
-      - name: run-pmd
-        run: pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text
         # run tests 
       - name: 'Run tests'
         run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
