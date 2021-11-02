@@ -1,5 +1,7 @@
 @ECHO OFF
 ECHO Congratulations! Your first steps to prepare your orgs
-git checkout DevHub 
-git checkout -b Feature1 DevHub
+ECHO git checkout master
+git checkout master
+ECHO git push
+git push --set-upstream origin Feature1
 PAUSE
