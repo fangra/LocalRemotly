@@ -21,7 +21,9 @@ jobs:
               #PMD Analysis
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'Review Source Code'
-        run: pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text
+        run: |
+         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/performance.xml" -f text
+         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text
        # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
