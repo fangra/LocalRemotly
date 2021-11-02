@@ -13,9 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: sfdx-actions/setup-pmd@v1
+      # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
-         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text --failOnViolation false
+         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text 
      # Salesforce CLI Installation
       - name: 'Install Salesforce CLI'
         run: |
