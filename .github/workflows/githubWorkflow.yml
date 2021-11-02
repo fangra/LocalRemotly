@@ -33,13 +33,13 @@ jobs:
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
-      - name: Create scratch org
-        run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
-      - name: Password generation !
-        run: "sfdx force:user:password:generate --targetusername soenv"
+    #  - name: Create scratch org
+    #    run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
+    #  - name: Password generation !
+    #    run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
       - name: Push source
-        run: "sfdx force:source:push -u soenv"
+        run: "sfdx force:source:push -u hub-org"
       - name: 'List orgs'
         run: "sfdx force:org:list"
         #PMD Analysis
