@@ -45,7 +45,7 @@ jobs:
         #PMD Analysis
       - uses: sfdx-actions/setup-pmd@v1
       - name: run-pmd
-        run: pmd -d ./force-app/main/default/classes -R ./ruleset.xml -f text
+        run: pmd -d "./force-app/main/default/classes" -R ".github/workflows//ruleset.xml" -f text
       - name: Upload results to GitHub
         uses: github/codeql-action/upload-sarif@v1
         with:
