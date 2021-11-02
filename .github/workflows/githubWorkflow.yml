@@ -43,16 +43,9 @@ jobs:
       - name: 'List orgs'
         run: "sfdx force:org:list"
         #PMD Analysis
-      - name: Run PMD Analysis on Files Changed
-        id: pmd-partial-analysis
-        if: github.event.pull_request != null
-        uses: synergy-au/pmd-analyser-action@v2
-        with:
-          pmd-version: 'latest'
-          file-path: './force-app/main/default'
-          rules-path: './ruleset.xml'
-          error-rules: 'AvoidDirectAccessTriggerMap,AvoidDmlStatementsInLoops,AvoidHardcodingId'
-          note-rules: 'ApexDoc'
+      - uses: sfdx-actions/setup-pmd@v1
+      - name: run-pmd
+        run: pmd -d ./force-app/main/default/classes -R ruleset.xml -f text
       - name: Upload results to GitHub
         uses: github/codeql-action/upload-sarif@v1
         with:
