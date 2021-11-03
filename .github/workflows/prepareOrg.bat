@@ -5,7 +5,7 @@ git checkout DevHub
 ECHO Do current branch
 git branch --show-current
 ECHO Do Feature creation
-git checkout Feature1
+git checkout Feature1 DEVHUB
 ECHO Feature checking
 git branch --show-current
 ECHO Do publish Feature1
