@@ -22,7 +22,7 @@ rem call sfdx force:user:password:generate --targetusername sorg
 ECHO Profile FLS Pushing
 call sfdx force:source:retrieve -x C:\Users\mfangra\Desktop\Local\LocalRemotly\.github\workflows\package.xml -u hug-org
 ECHO Scratch Org Pushing
-call sfdx force:source:push -u sorg
+call sfdx force:source:push -f -u sorg
 ECHO Export Data from DEVHUB
 rem call sfdx force:data:tree:export -q "SELECT Id,Name,(Select Subject from Cases) FROM Account limit 3" -d ./data -p -u hug-org FIELDS(ALL)
 set n=0
