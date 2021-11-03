@@ -20,9 +20,19 @@ rem call sfdx force:user:password:generate --targetusername sorg
 ECHO Scratch Org Pushing
 call sfdx force:source:push -u sorg
 ECHO Export Data from DEVHUB
-call sfdx force:data:tree:export -q "SELECT Id,Name,(Select Subject from Cases) FROM Account limit 3" -d ./data -p -u hug-org
+rem call sfdx force:data:tree:export -q "SELECT Id,Name,(Select Subject from Cases) FROM Account limit 3" -d ./data -p -u hug-org
+set list=(Account Case)
+set n=0
+for %%a in %list% do (
+   call sfdx force:data:soql:query -q "SELECT FIELDS(ALL) FROM %%a LIMIT 10" -u=hug-org -r=csv > %%a.csv
+)
 ECHO Import Data to sorg
-call sfdx force:data:tree:import -p data/Account-Case-plan.json -u sorg
+rem call sfdx force:data:tree:import -p data/Account-Case-plan.json -u sorg
+set list=(Account Case)
+set n=0
+for %%a in %list% do (
+call sfdx force:data:bulk:upsert -s Account -f Account.csv -i Id -w 2
+)
 ECHO Dispaly Password
-call sfdx force:user:display -u sorg
+rem call sfdx force:user:display -u sorg
 PAUSE
