@@ -1,4 +1,5 @@
 @ECHO OFF
+set list=(Account Case)
 ECHO #####################################
 ECHO Congratulations! Your first steps to prepare your orgs
 ECHO Do Checkout
@@ -18,22 +19,23 @@ ECHO Scratch Org
 rem call sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias sorg
 ECHO Password generation 
 rem call sfdx force:user:password:generate --targetusername sorg
+ECHO Profile FLS Pushing
+call sfdx force:source:retrieve -x C:\Users\mfangra\Desktop\Local\LocalRemotly\.github\workflows\package.xml -u hug-org
 ECHO Scratch Org Pushing
 call sfdx force:source:push -u sorg
 ECHO Export Data from DEVHUB
-rem call sfdx force:data:tree:export -q "SELECT Id,Name,(Select Subject from Cases) FROM Account limit 3" -d ./data -p -u hug-org
-set list=(Account Case)
+rem call sfdx force:data:tree:export -q "SELECT Id,Name,(Select Subject from Cases) FROM Account limit 3" -d ./data -p -u hug-org FIELDS(ALL)
 set n=0
 for %%a in %list% do (
    call sfdx force:data:soql:query -q "SELECT FIELDS(ALL) FROM %%a LIMIT 10" -u=hug-org -r=csv > %%a.csv
 )
 ECHO Import Data to sorg
 rem call sfdx force:data:tree:import -p data/Account-Case-plan.json -u sorg
-set list=(Account Case)
 set n=0
 for %%a in %list% do (
-call sfdx force:data:bulk:upsert -s Account -f Account.csv -i Id -w 2
+echo %%a
+call sfdx force:data:bulk:upsert -s %%a -f %%a.csv -i Id -w 2 -u sorg
 )
 ECHO Dispaly Password
-rem call sfdx force:user:display -u sorg
+call sfdx force:user:display -u sorg
 PAUSE
