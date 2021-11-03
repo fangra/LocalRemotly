@@ -1,4 +1,5 @@
 @ECHO OFF
+ECHO #####################################
 ECHO Congratulations! Your first steps to prepare your orgs
 ECHO Do Checkout
 git checkout DevHub
@@ -25,4 +26,8 @@ ECHO Import Data to sorg
 call sfdx force:data:tree:import -p data/Account-Case-plan.json -u sorg
 ECHO Dispaly Password
 call sfdx force:user:display -u sorg
+
+ECHO #####################################
+ECHO.
+ECHO.
 PAUSE
