@@ -1,4 +1,5 @@
 @ECHO OFF
+ECHO #####################################
 ECHO Congratulations! Your first steps to prepare your orgs
 ECHO Do Checkout
 git checkout DevHub
@@ -34,5 +35,13 @@ for %%a in %list% do (
 call sfdx force:data:bulk:upsert -s Account -f Account.csv -i Id -w 2
 )
 ECHO Dispaly Password
+<<<<<<< HEAD
 rem call sfdx force:user:display -u sorg
+=======
+call sfdx force:user:display -u sorg
+
+ECHO #####################################
+ECHO.
+ECHO.
+>>>>>>> 8fdf2f06312863e22a3cc83526eb118d4dd351d4
 PAUSE
