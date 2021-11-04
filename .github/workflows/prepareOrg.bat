@@ -25,9 +25,11 @@ call sfdx force:auth:jwt:grant --clientid %Cli% --jwtkeyfile %pathkey%  --userna
 ECHO Scratch Org
 rem call sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias sorg
 ECHO Password generation 
-rem call sfdx force:user:password:generate --targetusername sorg
-ECHO Profile FLS Pushing
-call sfdx force:source:retrieve -x C:\Users\mfangra\Desktop\Local\LocalRemotly\.github\workflows\package.xml -u hug-org
+call sfdx force:user:password:generate --targetusername sorg
+rem ECHO Profile FLS Pushing
+rem call sfdx force:source:retrieve -x C:\Users\mfangra\Desktop\Local\LocalRemotly\.github\workflows\package.xml -u hug-org
+ECHO DEVHUB Pull source
+call sfdx force:source:pull -u hug-org
 ECHO Scratch Org Pushing
 call sfdx force:source:push -f -u sorg
 ECHO Export Data from DEVHUB
@@ -47,7 +49,7 @@ echo ##################
 )
 ECHO Import Data to sorg
 rem call sfdx force:data:tree:import -p data/Account-Case-plan.json -u sorg
-set /p Files=Enter your Files to Import :
+set /p Files=Enter your plan files to Import, exemple Account-Case-plan :
 set n=0
 rem for %%a in %list% do (
 for %%a in %Files% do (
