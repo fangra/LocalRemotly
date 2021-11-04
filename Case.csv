@@ -1,11 +1,1 @@
-Subject,SLAViolation__c,Product__c,PotentialLiability__c
-Frequent mechanical breakdown,No,GC3060,Yes
-Starting up generator consumes excessive power,No,GC5020,No
-Delay in installation; spare parts unavailable,No,GC3020,Yes
-Maintenance guidelines for generator unclear,No,GC5020,No
-Maintenance guidelines for generator unclear,No,GC1060,No
-Electronic panel fitting loose,No,GC3020,No
-Customer service for portable generators needs beefing up,No,GC1020,No
-Mechanical maintenance guidelines for generator misleading,No,GC3040,Yes
-Repeated motor breakdown while shutting off,Yes,GC1020,Yes
-Performance inadequate for second consecutive week,Yes,GC1060,Yes
+Terminate batch job (Y/N)? 
