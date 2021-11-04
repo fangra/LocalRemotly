@@ -1,0 +1,156 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef1"
+            },
+            "Subject": "Generator assembly instructions unclear",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef2"
+            },
+            "Subject": "Maintenance guidelines for generator unclear",
+            "AccountId": "@AccountRef1"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef3"
+            },
+            "Subject": "Mechanical maintenance guidelines for generator misleading",
+            "AccountId": "@AccountRef2"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef4"
+            },
+            "Subject": "Maintenance guidelines for generator unclear",
+            "AccountId": "@AccountRef3"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef5"
+            },
+            "Subject": "Electronic panel fitting loose",
+            "AccountId": "@AccountRef3"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef6"
+            },
+            "Subject": "Frequent mechanical breakdown",
+            "AccountId": "@AccountRef3"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef7"
+            },
+            "Subject": "Starting generator after electrical failure",
+            "AccountId": "@AccountRef4"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef8"
+            },
+            "Subject": "Shutting down of generator",
+            "AccountId": "@AccountRef4"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef9"
+            },
+            "Subject": "Cannot start generator after electrical failure",
+            "AccountId": "@AccountRef4"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef10"
+            },
+            "Subject": "Structural failure of generator base",
+            "AccountId": "@AccountRef5"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef11"
+            },
+            "Subject": "Power generation below stated level",
+            "AccountId": "@AccountRef5"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef12"
+            },
+            "Subject": "Structural breakdown of rotor assembly",
+            "AccountId": "@AccountRef8"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef13"
+            },
+            "Subject": "Customer service for portable generators needs beefing up",
+            "AccountId": "@AccountRef8"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef14"
+            },
+            "Subject": "Starting up generator consumes excessive power",
+            "AccountId": "@AccountRef8"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef15"
+            },
+            "Subject": "Delay in installation; spare parts unavailable",
+            "AccountId": "@AccountRef8"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef16"
+            },
+            "Subject": "Easy installation process",
+            "AccountId": "@AccountRef9"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef17"
+            },
+            "Subject": "Maintenance guidelines for generator unclear",
+            "AccountId": "@AccountRef9"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef18"
+            },
+            "Subject": "Electrical circuit malfunctioning",
+            "AccountId": "@AccountRef9"
+        },
+        {
+            "attributes": {
+                "type": "Case",
+                "referenceId": "CaseRef19"
+            },
+            "Subject": "Repeated motor breakdown while shutting off",
+            "AccountId": "@AccountRef10"
+        }
+    ]
+}
