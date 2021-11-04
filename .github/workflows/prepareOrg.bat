@@ -3,10 +3,12 @@ rem set /p list=Enter your objects exemple (Account,Case):
 set /p DevHub=Enter your DEV Branch Name : 
 set /p Feature=Enter your Feature Branch Name :
 set /p sqllist=Enter your SQL Querys Name :
-set Cli="3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq"
-set pathkey=C:\Users\mfangra\KeyOSSL\server3.key
+set Clid="3MVG9t0sl2P.pBypl07KvI.FUHkU1Hw6_7JdMUcR4O4vtd51XoD01z0JyibB.CUjGip1YlyEyHg.MK7GSgUNq"
+rem client Id of the connected app
+set pathkey=C:\Users\mfangra\KeyOSSL\server3.key 
+rem path of the server key
 set username="meri.wa@gmail.com"
-rem set list=(Account,Case)
+rem username of devHub
 ECHO #####################################
 ECHO Congratulations! Your first steps to prepare your orgs
 ECHO Do Checkout
@@ -21,15 +23,13 @@ ECHO Do publish %Feature%
 git push --set-upstream origin %Feature%
 ECHO End  Do publish %Feature%
 ECHO Authorize DEVHUB
-call sfdx force:auth:jwt:grant --clientid %Cli% --jwtkeyfile %pathkey%  --username %username% -a hug-org -d
+call sfdx force:auth:jwt:grant --clientid %Clid% --jwtkeyfile %pathkey%  --username %username% -a hug-org -d
 ECHO Scratch Org
 rem call sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias sorg
 ECHO Password generation 
 call sfdx force:user:password:generate --targetusername sorg
 rem ECHO Profile FLS Pushing
 rem call sfdx force:source:retrieve -x C:\Users\mfangra\Desktop\Local\LocalRemotly\.github\workflows\package.xml -u hug-org
-ECHO DEVHUB Pull source
-call sfdx force:source:pull -u hug-org
 ECHO Scratch Org Pushing
 call sfdx force:source:push -f -u sorg
 ECHO Export Data from DEVHUB
