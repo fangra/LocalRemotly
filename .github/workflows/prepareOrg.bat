@@ -22,8 +22,8 @@ git branch --show-current
 ECHO Do publish %Feature%
 git push --set-upstream origin %Feature%
 ECHO End  Do publish %Feature%
-ECHO Authorize DEVHUB
-call sfdx force:auth:jwt:grant --clientid %Clid% --jwtkeyfile %pathkey%  --username %username% -a hug-org -d
+rem ECHO Authorize DEVHUB
+rem call sfdx force:auth:jwt:grant --clientid %Clid% --jwtkeyfile %pathkey%  --username %username% -a hug-org -d
 ECHO Scratch Org
 rem call sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias sorg
 ECHO Password generation 
@@ -34,36 +34,35 @@ ECHO Scratch Org Pushing
 call sfdx force:source:push -f -u sorg
 ECHO Export Data from DEVHUB
 set n=0
-rem for %%a in %list% do (
+
 for %%a in %sqllist% do (
-echo Start Query of SObject : %%a 
-echo ##################
-rem if %%a == Account call sfdx force:data:soql:query -q "SELECT  Name,FIELDS(CUSTOM) FROM %%a LIMIT 10" -u=hug-org -r=csv > %%a.csv
-rem if %%a == Case call sfdx force:data:soql:query -q "SELECT  Subject,Account.SF_Account_Number__c,SLAViolation__c,Product__c,PotentialLiability__c FROM %%a LIMIT 10" -u=hug-org -r=csv > %%a.csv
-rem if %%a == Account call sfdx force:data:tree:export -q "SELECT Id,Name,FIELDS(CUSTOM) FROM %%a LIMIT 10" -d ./data -p -u hug-org 
-rem if %%a == Case call sfdx force:data:tree:export -q "SELECT Id,Subject,FIELDS(CUSTOM) FROM %%a LIMIT 10" -d ./data -p -u hug-org 
-rem if %%a == Case call sfdx force:data:tree:export -q "SELECT  Id,Name, (SELECT Id,Subject FROM Cases) FROM Account LIMIT 10" -d ./data -p -u hug-org 
-call sfdx force:data:tree:export -q %%a -d ./data -p -u hug-org 
-echo End Query 
-echo ##################
+    echo Start Query of SObject : %%a 
+    echo ##################
+    rem if %%a == Account call sfdx force:data:soql:query -q "SELECT  Name,FIELDS(CUSTOM) FROM %%a LIMIT 10" -u=hug-org -r=csv > %%a.csv
+    rem if %%a == Case call sfdx force:data:soql:query -q "SELECT  Subject,Account.SF_Account_Number__c,SLAViolation__c,Product__c,PotentialLiability__c FROM %%a LIMIT 10" -u=hug-org -r=csv > %%a.csv
+    rem if %%a == Account call sfdx force:data:tree:export -q "SELECT Id,Name,FIELDS(CUSTOM) FROM %%a LIMIT 10" -d ./data -p -u hug-org 
+    rem if %%a == Case call sfdx force:data:tree:export -q "SELECT Id,Subject,FIELDS(CUSTOM) FROM %%a LIMIT 10" -d ./data -p -u hug-org 
+    rem if %%a == Case call sfdx force:data:tree:export -q "SELECT  Id,Name, (SELECT Id,Subject FROM Cases) FROM Account LIMIT 10" -d ./data -p -u hug-org 
+    call sfdx force:data:tree:export -q %%a -d ./data -p -u hug-org 
+    echo End Query 
+    echo ##################
 )
 ECHO Import Data to sorg
 rem call sfdx force:data:tree:import -p data/Account-Case-plan.json -u sorg
 set /p Files=Enter your plan files to Import, exemple Account-Case-plan :
 set n=0
-rem for %%a in %list% do (
 for %%a in %Files% do (
-echo %%a
-echo Start Upsert of %%a  's Data
-echo ##################
-rem echo sfdx force:data:bulk:upsert -s %%a -f %%a.csv -i Id -w 2 -u sorg
-rem call sfdx force:data:bulk:upsert -s %%a -f %%a.csv -i Id -w 2 -u sorg
-rem sfdx force:data:tree:import -p data/%%a-plan.json -u sorg
-rem if %%a == Case  sfdx force:data:tree:import -p data/%%a.json -u sorg
-sfdx force:data:tree:import -p data/%%a.json -u sorg
-echo End Upsert 
-echo ##################
+    echo %%a
+    echo Start Upsert of %%a  's Data
+    echo ##################
+    rem echo sfdx force:data:bulk:upsert -s %%a -f %%a.csv -i Id -w 2 -u sorg
+    rem call sfdx force:data:bulk:upsert -s %%a -f %%a.csv -i Id -w 2 -u sorg
+    rem sfdx force:data:tree:import -p data/%%a-plan.json -u sorg
+    rem if %%a == Case  sfdx force:data:tree:import -p data/%%a.json -u sorg
+    call sfdx force:data:tree:import -p data/%%a.json -u sorg
+    echo End Upsert 
+    ECHO ##################
 )
-ECHO Dispaly Password
+ECHO Dispaly Scratch Org Information
 call sfdx force:user:display -u sorg
-PAUSE
+EXIT
