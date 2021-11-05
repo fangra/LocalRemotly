@@ -3,7 +3,7 @@ name: "sfdx"
 on: 
   pull_request:
    branches:
-   - master
+   - ${{GITHUB_BASE_REF}}
 
 jobs:
   build:
@@ -77,8 +77,8 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: Integration
-          target_branch: master
+          from_branch: ${{GITHUB_HEAD_REF}}
+          target_branch: ${{GITHUB_BASE_REF}}
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
