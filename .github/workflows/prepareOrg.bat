@@ -61,7 +61,7 @@ IF %WData% EQU n GOTO end  (
                 ECHO Start Export using Query : %%Q
                 ECHO ##################
                 call sfdx force:data:tree:export -q %%Q -d ./data -p -u %dataorg% 
-                ECHO End Export using Query
+                ECHO End Export.
                 ECHO ##################
         )
     )
@@ -69,7 +69,6 @@ IF %WData% EQU n GOTO end  (
 # Import Data into scratch org :
     ECHO Import Data to %sorg% :
     for %%A in %Files% do (
-        ECHO %%A
         ECHO Start Import of %%A :
         ECHO ##################
         call sfdx force:data:tree:import -p data/%%A-plan.json -u %sorg%
