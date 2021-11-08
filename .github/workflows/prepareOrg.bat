@@ -1,68 +1,83 @@
 @ECHO OFF
-setlocal EnableExtensions EnableDelayedExpansion
-set /p DevHub=Enter your DEV Branch Name : 
-set /p Feature=Enter your Feature Branch Name :
-set /p sorg=Enter your Scratch Organisation Alias :
-set /p WData=Do you want to populate your scratch org ? [y/n]:
+setlocal EnableDelayedExpansion
 
-IF %WData%==y ( set /p sqllist=Enter your SQL Querys Name :)
+set /p DevHubb=Enter your DEV Branch Name : 
+
+set /p Feature=Enter your Feature Branch Name :
+
+set /p huborg=Enter your DevHUB Org Alias :
+
+set /p sorg=Enter your New Scratch Org Alias :
+
+set /p WData=Do you want to add data to your Scratch Org? [y/n]:
+
+IF %WData%==y ( set /p WOData=Do you want to Export Data from a source org or use files ? [s/f]: ) 
+
+IF NOT DEFINED WData ( SET WData=n)
+
+IF NOT DEFINED WOData ( SET WOData=n)
+
+IF %WOData%==f ( set /p Files=Enter your Files's Names : )
+
+IF %WOData%==s ( set /p dataorg=Enter your data source org ? : )
+
+IF %WOData%==s ( set /p Files=Enter your Objects Files's Names : )
 
 
 ECHO #####################################
 ECHO Start preparing your orgs and branches..
 
-ECHO Checkout %DevHub% :
-git checkout %DevHub%
+ECHO Checkout %DevHubb% :
+git checkout %DevHubb%
 
 ECHO Check Current Branch :
 git branch --show-current
 
 ECHO Create %Feature%  :
-git checkout -b %Feature% %DevHub%
+git checkout -b %Feature% %DevHubb%
 
-ECHO Check %Feature% :
-git branch --show-current
-
-ECHO Publish %Feature% :
-git push --set-upstream origin %Feature%
 
 ECHO Create %sorg% Scratch Org :
 rem call sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias %sorg%
 
 ECHO Generate %sorg% Password :
-call sfdx force:user:password:generate --targetusername %sorg%
+rem call sfdx force:user:password:generate --targetusername %sorg%
 
 
+ECHO Set %sorg% As default :
+call sfdx force:config:set defaultusername=%sorg%
+
+rem verify whe, failed pushing sorg
 ECHO Push into %sorg% Scratch Org :
-call sfdx force:source:push -u sorg
+call sfdx force:source:push -u %sorg%
 
-ECHO %WData%
 
-IF %WData%==y (
-
-    ECHO Export Data from DEVHUB :
-
-    for %%a in %sqllist% do (
-        echo Start Export using Query : %%a 
-        echo ##################
-        call sfdx force:data:tree:export -q %%a -d ./data -p -u hug-org 
-        echo End Export using Query
-        echo ##################
+IF %WData% EQU n GOTO end  ( 
+) ELSE (
+    ECHO  in the IF
+    IF %WOData% EQU s (
+        ECHO Export Data from DEVHUB :
+        for /F "tokens=*" %%Q in (./data/queries) do (  
+                ECHO Start Export using Query : %%Q
+                ECHO ##################
+                call sfdx force:data:tree:export -q %%Q -d ./data -p -u %dataorg% 
+                ECHO End Export using Query
+                ECHO ##################
+        )
     )
-
+    
     ECHO Import Data to %sorg% :
-
-    set /p Files=Enter your plan files to Import, exemple Account-Case-plan :
-    for %%a in %Files% do (
-        echo %%a
-        echo Start Import of %%a Data
-        echo ##################
-        call sfdx force:data:tree:import -p data/%%a.json -u %sorg%
+    for %%A in %Files% do (
+        ECHO %%A
+        ECHO Start Import of %%A :
+        ECHO ##################
+        call sfdx force:data:tree:import -p data/%%A-plan.json -u %sorg%
         echo End Import. 
         ECHO ##################
     )
 )
 
+:end
 
 ECHO Dispaly %sorg% Scratch Org Information :
 call sfdx force:user:display -u %sorg%
@@ -70,4 +85,5 @@ call sfdx force:user:display -u %sorg%
 ECHO End of Preparation.
 ECHO #####################################
 
-PAUSE
+EXIT
+endlocal

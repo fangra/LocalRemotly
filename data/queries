@@ -1,0 +1,2 @@
+"Select id, name  from Account limit 10"
+"Select id, name, (select id from Cases) from Account limit 10"
