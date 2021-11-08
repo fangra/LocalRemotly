@@ -17,7 +17,7 @@ jobs:
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
-         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text -failOnViolation false
+         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text
       # Verify Installation of Salesforce CLI   
       - name: 'Check Salesforce CLI '
         run : |
