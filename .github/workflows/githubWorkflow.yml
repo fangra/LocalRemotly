@@ -16,8 +16,13 @@ jobs:
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
-         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text 
-     # Salesforce CLI Installation
+        pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text 
+      # Verify Installation of Salesforce CLI   
+      - name: 'Check Salesforce CLI '
+        run : |
+          sfdx --version
+        #  echo ::set-output IsInstalled=
+      # Salesforce CLI Installation
       - name: 'Install Salesforce CLI'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
@@ -83,7 +88,7 @@ jobs:
        # Convert into metadata 
       - name: 'Convert Metadata'
         run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
-      # Run a check only test pre deployment
+      # Run a check only test pre deployment -x for Package.xml
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org 
       # Run deployment
