@@ -2,12 +2,16 @@
 setlocal EnableDelayedExpansion
 
 set /p DevHubb=Enter your DEV Branch Name : 
+
 set /p Feature=Enter your Feature Branch Name :
+
 set /p huborg=Enter your DevHUB Org Alias :
+
 set /p sorg=Enter your New Scratch Org Alias :
+
 set /p WData=Do you want to add data to your Scratch Org? [y/n]:
 
-IF %WData%==y ( set /p WOData=Do you want to Export Data from a source org or files ? [s/f]: ) 
+IF %WData%==y ( set /p WOData=Do you want to Export Data from a source org or use files ? [s/f]: ) 
 
 IF NOT DEFINED WData ( SET WData=n)
 
@@ -17,7 +21,7 @@ IF %WOData%==f ( set /p Files=Enter your Files's Names : )
 
 IF %WOData%==s ( set /p dataorg=Enter your data source org ? : )
 
-IF %WOData%==s ( set /p Files=Enter your Object's Files plan Names : )
+IF %WOData%==s ( set /p Files=Enter your Objects Files's Names : )
 
 
 ECHO #####################################
@@ -32,8 +36,6 @@ git branch --show-current
 ECHO Create %Feature%  :
 git checkout -b %Feature% %DevHubb%
 
-ECHO Check %Feature% :
-git branch --show-current
 
 ECHO Create %sorg% Scratch Org :
 rem call sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias %sorg%
@@ -49,9 +51,6 @@ rem verify whe, failed pushing sorg
 ECHO Push into %sorg% Scratch Org :
 call sfdx force:source:push -u %sorg%
 
-rem if wdata == n goto  else export
-rem 3 conditions - No Data - Yes with Exported Data - Yes with files already exported
-rem export from source org selected
 
 IF %WData% EQU n GOTO end  ( 
 ) ELSE (
