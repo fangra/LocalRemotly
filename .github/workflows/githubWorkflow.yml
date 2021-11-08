@@ -4,7 +4,7 @@ on:
   pull_request:
    branches:
     - master
-   #- ${{GITHUB_BASE_REF}}
+
 
 jobs:
   build:
@@ -17,12 +17,7 @@ jobs:
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
-         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text
-      # Verify Installation of Salesforce CLI   
-      - name: 'Check Salesforce CLI '
-        run : |
-          sfdx --version
-        #  echo ::set-output IsInstalled=
+         pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text -failOnViolation false
       # Salesforce CLI Installation
       - name: 'Install Salesforce CLI'
         run: |
@@ -30,7 +25,6 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
-              #PMD Analysis
        # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
@@ -83,12 +77,12 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: ${{GITHUB_HEAD_REF}}
-          target_branch: ${{GITHUB_BASE_REF}}
+          from_branch: $GITHUB_HEAD_REF
+          target_branch: $GITHUB_BASE_REF
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
-        run: "sfdx force:source:convert --rootdir=force-app --outputdir=convert"
+        run: "sfdx force:source:convert --manifest=package/packages.xml --outputdir=convert"
       # Run a check only test pre deployment -x for Package.xml
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org 
