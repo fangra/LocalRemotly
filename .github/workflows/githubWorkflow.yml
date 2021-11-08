@@ -3,7 +3,8 @@ name: "sfdx"
 on: 
   pull_request:
    branches:
-   - ${{GITHUB_BASE_REF}}
+    - master
+   #- ${{GITHUB_BASE_REF}}
 
 jobs:
   build:
