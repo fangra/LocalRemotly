@@ -51,12 +51,12 @@ rem verify whe, failed pushing sorg
 ECHO Push into %sorg% Scratch Org :
 call sfdx force:source:push -u %sorg%
 
-
+# Export Data from source org using queries files
 IF %WData% EQU n GOTO end  ( 
 ) ELSE (
     ECHO  in the IF
     IF %WOData% EQU s (
-        ECHO Export Data from DEVHUB :
+        ECHO Export Data from %dataorg% :
         for /F "tokens=*" %%Q in (./data/queries) do (  
                 ECHO Start Export using Query : %%Q
                 ECHO ##################
@@ -65,7 +65,8 @@ IF %WData% EQU n GOTO end  (
                 ECHO ##################
         )
     )
-    
+
+# Import Data into scratch org :
     ECHO Import Data to %sorg% :
     for %%A in %Files% do (
         ECHO %%A
