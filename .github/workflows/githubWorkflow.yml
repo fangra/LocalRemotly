@@ -18,7 +18,7 @@ jobs:
       - name: 'Review Source Code'
         run: |
          pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text -failOnViolation false
-      # Salesforce CLI Installation
+      # Salesforce CLI Installation.
       - name: 'Install Salesforce CLI'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
