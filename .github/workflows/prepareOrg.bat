@@ -25,7 +25,7 @@ IF %WOData%==s ( set /p Files=Enter your Objects Files's Names : )
 
 
 ECHO #####################################
-ECHO Start preparing your orgs and branches..
+ECHO Start preparing your orgs and branches...
 
 ECHO Checkout %DevHubb% :
 git checkout %DevHubb%
