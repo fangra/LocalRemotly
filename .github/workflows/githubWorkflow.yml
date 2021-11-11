@@ -20,7 +20,8 @@ jobs:
         run : |
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
-          sgp --to "master" --from "GHS" --output ./data
+          git rev-list commiting commit
+          sgp --to $GITHUB_BASE_REF --from $GITHUB_HEAD_REF --output ./data
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
