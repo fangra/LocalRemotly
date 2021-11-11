@@ -18,7 +18,7 @@ jobs:
         run: 
          npm install -g sfdc-git-package
       - name : 'sgp -h'
-        run :  sgp -h
+        run :  sgp -v
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
