@@ -17,7 +17,11 @@ jobs:
       - name: 'generate commite package'
         run: npm install -g sfdc-git-package
       - name : 'test sgp -v'
+<<<<<<< HEAD
         run : sgp --to "master" --from "GHS" --output ./data
+=======
+        run : sgp --to "GHS" --output ./data
+>>>>>>> 8cd5b4ce68d00183fbe3224edb2fffe8ac127953
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
