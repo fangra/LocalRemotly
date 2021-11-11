@@ -16,8 +16,8 @@ jobs:
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
         run: npm install -g sfdc-git-package
-      - name : 'test sgp -v'
-        run : sgp --to $GITHUB_HEAD_REF --output ./data
+   #   - name : 'test sgp -v'
+   #     run : sgp --to "master" --from "GHS" --output ./data
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
