@@ -22,8 +22,8 @@ jobs:
           echo $GITHUB_HEAD_REF
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
-         # git rev-list commiting commit
-          sgp --from ed715092ab8f2856a2a82b1ae80083613294be83 --output ./data
+          git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
+         # sgp --from ed715092ab8f2856a2a82b1ae80083613294be83 --output ./data
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
