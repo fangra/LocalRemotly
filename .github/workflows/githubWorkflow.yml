@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
-        run: yarn globally add sfdc-git-package
-      - name : 'sgp -v'
+        run: npm install -g sfdc-git-package
+      - name : 'test sgp -v'
         run : sgp -v
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
