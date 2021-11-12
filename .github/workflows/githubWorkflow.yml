@@ -20,6 +20,9 @@ jobs:
         run : |
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
+          sfdx plugins:install sfdx-git-delta
+          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "."
+
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
         #  git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
