@@ -95,7 +95,7 @@ jobs:
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
-        run: "sfdx force:source:convert --manifest=package/packages.xml --outputdir=convert"
+        run: "sfdx force:source:convert --manifest=package/package.xml --outputdir=convert"
       # Run a check only test pre deployment -x for Package.xml
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org 
