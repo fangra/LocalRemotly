@@ -15,7 +15,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
-        run: npm install -g sfdc-git-package
+        run: |
+         npm install -g sfdc-git-package
+         npm start
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
