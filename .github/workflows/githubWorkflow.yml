@@ -32,7 +32,7 @@ jobs:
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
           sfdx plugins:install sfdx-git-delta
-          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "."
+          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "./package"
 
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
