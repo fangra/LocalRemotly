@@ -32,7 +32,7 @@ jobs:
           sgp --help
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
-          sgp -f dce81189e3e8f14864c757e1b886159eb14fdec5 -o ./package
+          sgp -f dce81189e3e8f14864c757e1b886159eb14fdec5 -o ./package/packages.xml
 
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
