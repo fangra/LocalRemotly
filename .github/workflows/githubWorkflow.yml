@@ -31,6 +31,7 @@ jobs:
       - name : 'test sgp -v'
         run : |
           sgp --help
+          sfdx plugins:install sfdx-git-delta
           sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output ./package
 
         #  git diff GHS master -- ./force-app
