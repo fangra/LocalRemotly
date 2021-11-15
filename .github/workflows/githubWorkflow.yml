@@ -31,7 +31,7 @@ jobs:
       - name : 'test sgp -v'
         run : |
           sgp --help
-          sgp -f "HEAD" -o ./package/packages.xml
+          sgp -o ./package/packages.xml
 
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
