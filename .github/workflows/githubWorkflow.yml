@@ -33,18 +33,16 @@ jobs:
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
           sgp -h
-          sfdx plugins:install sfdx-git-delta | echo 'y'
-          sfdx sgd:source:delta --to master --from DevHub --output "."
-
+          
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #   sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
         #   git diff master | force push -f 
-       #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
+        # git diff DevHub --name-only --diff-filter=ACM | force push -f 
         #  git diff GHS master -- ./force-app echo 'y' | sfdx plugins:install sfdx-git-delta  echo 'y' | sfdx sgp:source:delta
         #  git rev-list --max-parents=0 HEAD
         #  git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
-         # sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
-       # Runs a set of commands using the runners shell
+        # sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
+      # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
