@@ -33,7 +33,8 @@ jobs:
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
           sgp -h
-          sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
+          npm install -g sfdx-diff-pkg-generation
+          sdpg -h
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #   sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
         #   git diff master | force push -f 
