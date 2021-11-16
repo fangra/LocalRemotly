@@ -30,6 +30,7 @@ jobs:
           ./sfdx-cli/install
       - name : 'test commit to package.xml'
         run : |
+          git --version
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
       - name: 'testing'
