@@ -30,7 +30,7 @@ jobs:
           ./sfdx-cli/install
       - name : 'test sgp -v'
         run : |
-          git diff DevHub   -- ./force-app
+          git diff DevHub   -- ./force-app > file.txt
         # sgp -h
         #   git diff master | force push -f 
        #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
