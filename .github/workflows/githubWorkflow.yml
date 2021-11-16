@@ -32,9 +32,10 @@ jobs:
         run : |
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
-          sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
+          sgp -h
+          sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
-        # sgp -h
+        #   sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
         #   git diff master | force push -f 
        #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
         #  git diff GHS master -- ./force-app echo 'y' | sfdx plugins:install sfdx-git-delta  echo 'y' | sfdx sgp:source:delta
