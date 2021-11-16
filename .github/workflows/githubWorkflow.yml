@@ -31,7 +31,7 @@ jobs:
       - name : 'test sgp -v'
         run : |
           sgp -h
-          sfdx plugins:install sfdx-git-delta
+          echo 'y' | sfdx plugins:install sfdx-git-delta
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
         #  git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
