@@ -1,9 +1,9 @@
 name: "sfdx"
 
-on: push
-#  pull_request:
-  # branches:
-   # - master
+on:
+  pull_request:
+   branches:
+    - master
 
 
 jobs:
@@ -30,7 +30,8 @@ jobs:
           ./sfdx-cli/install
       - name : 'test sgp -v'
         run : |
-          git diff master   -- ./force-app
+          git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
+
         # sgp -h
         #   git diff master | force push -f 
        #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
