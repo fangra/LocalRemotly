@@ -30,9 +30,9 @@ jobs:
           ./sfdx-cli/install
       - name : 'test sgp -v'
         run : |
-          sgp -h
           git diff master   -- ./force-app
-       #   git diff master | force push -f 
+        # sgp -h
+        #   git diff master | force push -f 
        #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
         #  git diff GHS master -- ./force-app echo 'y' | sfdx plugins:install sfdx-git-delta  echo 'y' | sfdx sgp:source:delta
         #  git rev-list --max-parents=0 HEAD
