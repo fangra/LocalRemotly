@@ -16,7 +16,9 @@ jobs:
         with:
          fetch-depth: 2
       - name: 'testing'
-        run: git diff master
+        run: |
+         git checkout DevHub
+         git diff master
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
         run: |
