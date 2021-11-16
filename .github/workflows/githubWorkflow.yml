@@ -31,7 +31,7 @@ jobs:
       - name : 'test sgp -v'
         run : |
           sgp -h
-          git diff "DevHub^" "DevHub" | force push -f 
+          git diff master | force push -f 
        #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
         #  git diff GHS master -- ./force-app echo 'y' | sfdx plugins:install sfdx-git-delta  echo 'y' | sfdx sgp:source:delta
         #  git rev-list --max-parents=0 HEAD
