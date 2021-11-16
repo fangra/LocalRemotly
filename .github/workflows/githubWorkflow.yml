@@ -30,6 +30,8 @@ jobs:
           ./sfdx-cli/install
       - name : 'test sgp -v'
         run : |
+          echo  ${{ github.event.pull_request.base.sha }}
+          echo ${{ github.sha }}
           git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }}
 
         # sgp -h
