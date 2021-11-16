@@ -13,12 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2    
-        with:
-         fetch-depth: 2
-      - name: 'testing'
-        run: |
-         git checkout DevHub
-         git diff master
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
         run: |
@@ -39,7 +33,9 @@ jobs:
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
           sgp -h
-          
+        # - name: 'testing'
+        #  run:  git diff master
+ 
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #   sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
         #   git diff master | force push -f 
