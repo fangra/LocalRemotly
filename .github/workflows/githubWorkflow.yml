@@ -38,15 +38,6 @@ jobs:
         #  git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
          # sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
        # Runs a set of commands using the runners shell
-      - name: Compare the expected and actual dist/ directories
-        run: |
-         git diff --ignore-space-at-eol package/ | wc -l -gt 0
-      # If dist/ was different than expected, upload the expected version as an artifact
-      - uses: actions/upload-artifact@v2
-        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
-        with:
-          name: package
-          path: package/
       - name: 'Decrypt server file'
         env:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
