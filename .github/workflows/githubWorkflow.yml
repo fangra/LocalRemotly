@@ -1,6 +1,6 @@
 name: "sfdx"
 
-on: 
+on:
   pull_request:
    branches:
     - master
@@ -12,12 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2    
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
-        run: npm install -g sfdc-git-package
-   #   - name : 'test sgp -v'
-   #     run : sgp --to "master" --from "GHS" --output ./data
+        run: |
+         npm install --save -g sfdc-git-package
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
@@ -29,8 +28,23 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
-       # Runs a set of commands using the runners shell
-
+      - name : 'test commit to package.xml'
+        run : |
+          git --version
+          echo  ${{ github.event.pull_request.base.sha }}
+          echo ${{ github.sha }}
+      - name: 'testing'
+        run:  git diff 'DevHub' 'master' -- ./force-app | echo 'y' 
+ 
+        #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
+        #            sgp -h sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
+        #   git diff master | force push -f 
+        # git diff DevHub --name-only --diff-filter=ACM | force push -f 
+        #  git diff GHS master -- ./force-app echo 'y' | sfdx plugins:install sfdx-git-delta  echo 'y' | sfdx sgp:source:delta
+        #  git rev-list --max-parents=0 HEAD
+        #  git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
+        # sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
+      # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
@@ -87,7 +101,7 @@ jobs:
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
-        run: "sfdx force:source:convert --manifest=package/packages.xml --outputdir=convert"
+        run: "sfdx force:source:convert --manifest=package/package.xml --outputdir=convert"
       # Run a check only test pre deployment -x for Package.xml
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org 
