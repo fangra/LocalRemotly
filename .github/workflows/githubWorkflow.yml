@@ -30,7 +30,7 @@ jobs:
           ./sfdx-cli/install
       - name : 'test sgp -v'
         run : |
-          sgp --help
+          sgp -h
           sfdx plugins:install sfdx-git-delta
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
