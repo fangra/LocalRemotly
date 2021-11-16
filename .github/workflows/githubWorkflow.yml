@@ -34,7 +34,7 @@ jobs:
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
       - name: 'testing'
-        run:  git diff "DevHub" "master" -- ./force-app | echo 'y' 
+        run:  git diff 'DevHub' 'master' -- ./force-app | echo 'y' 
  
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #            sgp -h sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
