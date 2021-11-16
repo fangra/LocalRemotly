@@ -40,7 +40,7 @@ jobs:
        # Runs a set of commands using the runners shell
       - name: Compare the expected and actual dist/ directories
         run: |
-          if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
+          if [ "$(git diff --ignore-space-at-eol package/ | wc -l)" -gt "0" ]; then
             echo "Detected uncommitted changes after build.  See status below:"
             git diff
             exit 1
@@ -49,8 +49,8 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ failure() && steps.diff.conclusion == 'failure' }}
         with:
-          name: dist
-          path: dist/
+          name: package
+          path: package/
       - name: 'Decrypt server file'
         env:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
