@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2    
         with:
          fetch-depth: 2
-     - name: 'testing'
-         run: git diff master
+      - name: 'testing'
+        run: git diff master
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'generate commite package'
         run: |
