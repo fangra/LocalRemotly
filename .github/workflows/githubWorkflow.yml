@@ -34,7 +34,7 @@ jobs:
           echo ${{ github.sha }}
           sgp -h
           sfdx plugins:install sfdx-git-delta | echo 'y'
-          sfdx sgd:source:delta --to "master" --from "master^" --output "."
+          sfdx sgd:source:delta --to master --from DevHub --output "."
 
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #   sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
