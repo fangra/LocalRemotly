@@ -31,7 +31,7 @@ jobs:
       - name : 'test sgp -v'
         run : |
           sgp -h
-          sfdx sgp:source:delta
+          echo 'y' | sfdx sgp:source:delta
           echo 'y' | sfdx plugins:install sfdx-git-delta
         #  git diff GHS master -- ./force-app
         #  git rev-list --max-parents=0 HEAD
