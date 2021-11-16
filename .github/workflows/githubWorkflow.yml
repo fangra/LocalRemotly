@@ -32,7 +32,7 @@ jobs:
         run : |
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
-          git diff ./force-app  --diff-filter=ACM | force push -f -
+          git diff "./force-app"  --diff-filter=ACM | force push -f -
         # sgp -h
         #   git diff master | force push -f 
        #  git diff DevHub --name-only --diff-filter=ACM | force push -f 
