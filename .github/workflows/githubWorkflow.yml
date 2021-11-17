@@ -28,12 +28,7 @@ jobs:
           sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
-            env
-            export HOME=/root
-            env
             sfdx -v
-            node -v
-            npm -v
             sfdx plugins --core
       # sfdx sgd:source:delta -h
       # sfdx plugins:install sfdx-git-delta | echo 'y'
