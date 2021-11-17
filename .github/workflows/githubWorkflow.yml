@@ -25,6 +25,7 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
+          npm install -g sfdx-git-delta
           sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
