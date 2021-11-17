@@ -36,9 +36,8 @@ jobs:
           echo ${{ github.sha }}
       - name: 'testing'
         run: |
-          sgp --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --output ./package   
-          sfdx sgd:source:delta --to "origin/master" --from "origin/master^" --output "."
-
+           sfdx sgd:source:delta --to "origin/master" --from "origin/master^" --output "."
+    #  sgp --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --output ./package   
   #  echo $(git diff origin/master -- ./force-app)         
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #            sgp -h sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
