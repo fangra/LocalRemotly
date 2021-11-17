@@ -29,7 +29,8 @@ jobs:
       - name: 'install package for commits'
         run: |
           npm i sfdc-git-package 
-          npm ci
+          git add package-lock.json
+          git commit -m "Adding package lock"
           npm -v
           sfdx plugins --core
       # sfdx sgd:source:delta -h
