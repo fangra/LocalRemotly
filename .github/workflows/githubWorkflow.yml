@@ -17,7 +17,7 @@ jobs:
       - name: 'install package for commits'
         run: |
          npm install -g sfdc-git-package
-         sfdx plugins:install sfdx-git-delta | echo 'y'
+      #   sfdx plugins:install sfdx-git-delta | echo 'y'
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
