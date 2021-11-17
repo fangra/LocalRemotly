@@ -18,7 +18,7 @@ jobs:
          node-version: '16'
       - run: 
          npm get registry
-         npm install
+         npm install -g sfdc-git-package
       - uses: sfdx-actions/setup-pmd@v1
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
@@ -34,7 +34,6 @@ jobs:
     # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
-            npm install -g sfdc-git-package
             npm -v
             sfdx plugins --core
       # sfdx sgd:source:delta -h
