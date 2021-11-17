@@ -13,10 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2    
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install
       - uses: sfdx-actions/setup-pmd@v1
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
@@ -30,12 +26,13 @@ jobs:
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
           npm install -g sfdc-git-package
-          sfdx plugins:install sfdx-git-delta | echo 'y'
+          
+      - name: 'install plugins'
+        run: sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
             sfdx -v
             sfdx plugins --core
-            npm install -g sfdc-git-package
       # sfdx sgd:source:delta -h
       # sfdx plugins:install sfdx-git-delta | echo 'y'
        # npm install -g sfdc-git-package
