@@ -14,9 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1    
       - uses: sfdx-actions/setup-pmd@v1
-      - name: 'generate commite package'
+      - name: 'install package for commits'
         run: |
          npm install --save -g sfdc-git-package
+         sfdx plugins:install sfdx-git-delta | echo 'y'
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
@@ -36,7 +37,9 @@ jobs:
       - name: 'testing'
         run: |
           sgp --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --output ./package   
-       #  echo $(git diff origin/master -- ./force-app)         
+          sfdx sgd:source:delta --to "origin/master" --from "origin/master^" --output "."
+
+  #  echo $(git diff origin/master -- ./force-app)         
         #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
         #            sgp -h sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
         #   git diff master | force push -f 
