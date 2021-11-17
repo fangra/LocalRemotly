@@ -28,6 +28,8 @@ jobs:
     # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
+          git config --global user.email "mfangra@deloitte.fr"
+          git config --global user.name "meri.wa@gmail.com"
           npm i sfdc-git-package 
           git add package-lock.json
           git commit -m "Adding package lock"
