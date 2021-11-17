@@ -35,16 +35,13 @@ jobs:
       - name: 'install package for commits'
         run: |
             npm install -g sfdc-git-package
-            npm audit fix --force
-            sfpackage master DevHub ./deploy/
             npm -v
             sfdx plugins --core
       # sfdx sgd:source:delta -h
       # sfdx plugins:install sfdx-git-delta | echo 'y'
        # npm install -g sfdc-git-package
       - name: 'testing'
-        run: |
-         yarn globally add sfdc-git-package         
+        run: |       
          sgp --from 4164860264a75a753e1d7846b0937c7f20b2901f --to 6be35f44ec79a2af3ae4c3c013f360db119e59cb --output ./package/package.xml
        #  sgp --from ${{ github.event.pull_request.head.sha }} --to ${{ github.event.pull_request.base.sha }} --output ./package
        #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.head.sha }} ${{ github.event.pull_request.base.sha }} > ./package/package.xml
