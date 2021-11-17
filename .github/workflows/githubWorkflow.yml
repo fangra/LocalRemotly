@@ -34,7 +34,7 @@ jobs:
             node -v
             npm -v
             sfdx plugins --core
-            sfdx sgd:source:delta -h
+      # sfdx sgd:source:delta -h
       # sfdx plugins:install sfdx-git-delta | echo 'y'
        # npm install -g sfdc-git-package
       - name : 'test commit to package.xml'
