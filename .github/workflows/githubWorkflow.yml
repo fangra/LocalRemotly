@@ -30,23 +30,6 @@ jobs:
          sfdx plugins:install sfdx-git-delta | echo y
          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "."
          sfdx plugins --core
-       # git config --global user.email "mfangra@deloitte.fr"
-       # git config --global user.name "meri.wa@gmail.com"
-      # npm i sfdc-git-package 
-      #  git add package-lock.json
-      # git commit -m "Adding package lock"
-       # npm -v
-          
-      # sfdx sgd:source:delta -h
-      # sfdx plugins:install sfdx-git-delta | echo 'y'
-       # npm install -g sfdc-git-package
-      - name: 'testing'
-        run: |      
-         sgp -h
-         sgp --from 4164860264a75a753e1d7846b0937c7f20b2901f --to 6be35f44ec79a2af3ae4c3c013f360db119e59cb --output ./package/package.xml
-       #  sgp --from ${{ github.event.pull_request.head.sha }} --to ${{ github.event.pull_request.base.sha }} --output ./package
-       #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.head.sha }} ${{ github.event.pull_request.base.sha }} > ./package/package.xml
-
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
