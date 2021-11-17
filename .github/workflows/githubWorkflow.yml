@@ -34,7 +34,7 @@ jobs:
     # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
-            npm install -g sf-packager
+            npm install -g sfdc-git-package
             npm audit fix --force
             sfpackage master DevHub ./deploy/
             npm -v
