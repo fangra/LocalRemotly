@@ -28,7 +28,8 @@ jobs:
           npm install -g sfdc-git-package
           
       - name: 'install plugins'
-        run: sfdx plugins:install sfdx-git-delta | echo 'y'
+        run: npm install -g sf-packager
+    # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
             sfdx -v
