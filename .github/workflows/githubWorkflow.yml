@@ -16,7 +16,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
          node-version: '16'
-      - run: npm install
+      - run: 
+         npm get registry
+         npm install
       - uses: sfdx-actions/setup-pmd@v1
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
