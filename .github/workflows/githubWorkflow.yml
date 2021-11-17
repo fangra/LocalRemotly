@@ -18,6 +18,7 @@ jobs:
          node-version: '16'
       - run: 
          npm get registry
+         npm install
          npm install -g sfdc-git-package
       - uses: sfdx-actions/setup-pmd@v1
       # Review Source code use --failOnViolation false to bypass the fail
