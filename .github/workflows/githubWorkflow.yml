@@ -44,6 +44,7 @@ jobs:
       - name: 'testing'
         run: |
          sgp -h
+         sgp --from ${{ github.event.pull_request.head.sha }} --to ${{ github.event.pull_request.base.sha }} --output ./package
        #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.head.sha }} ${{ github.event.pull_request.base.sha }} > ./package/package.xml
 
       # Runs a set of commands using the runners shell
