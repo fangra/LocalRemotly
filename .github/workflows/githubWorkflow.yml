@@ -25,9 +25,9 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
-    # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
+         sfdx plugins:install sfdx-git-delta | echo y
          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "."
          sfdx plugins --core
        # git config --global user.email "mfangra@deloitte.fr"
