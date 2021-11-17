@@ -12,11 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1    
+      - uses: actions/checkout@v2    
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'install package for commits'
         run: |
-         sfdx plugins:install sfdx-git-delta | echo 'y'
+            env
+            export HOME=/root
+            env
+            sfdx -v
+            node -v
+            npm -v
+            sfdx plugins --core
+            sfdx sgd:source:delta -h
+      # sfdx plugins:install sfdx-git-delta | echo 'y'
        # npm install -g sfdc-git-package
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
