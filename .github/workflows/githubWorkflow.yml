@@ -29,6 +29,7 @@ jobs:
       - name: 'install package for commits'
         run: |
           npm i sfdc-git-package 
+          npm ci
           npm -v
           sfdx plugins --core
       # sfdx sgd:source:delta -h
