@@ -17,6 +17,7 @@ jobs:
         with:
          node-version: '16'
       - run: 
+         npm cache clean --force
          npm install
       - uses: sfdx-actions/setup-pmd@v1
       # Review Source code use --failOnViolation false to bypass the fail
