@@ -30,7 +30,7 @@ jobs:
       - name: 'install plugins'
         run: |
          npm install -g sf-packager
-         sfpackage master DevHub ./package/
+         sfpackage origin/master origin/DevHub ./package/
         
     # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
