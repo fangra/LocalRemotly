@@ -34,7 +34,9 @@ jobs:
     # sfdx plugins:install sfdx-git-delta | echo 'y'
       - name: 'install package for commits'
         run: |
-            sfdx plugins:install sfdx-git-packager | echo 'y'
+            npm install xmlbuilder
+            npm install xmlbuilder
+            npm install -g sfdc-git-package
             npm -v
             sfdx plugins --core
       # sfdx sgd:source:delta -h
