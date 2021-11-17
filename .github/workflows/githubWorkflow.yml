@@ -35,6 +35,7 @@ jobs:
       - name: 'install package for commits'
         run: |
             npm install -g sf-packager
+            npm audit fix --force
             sfpackage master DevHub ./deploy/
             npm -v
             sfdx plugins --core
