@@ -16,7 +16,7 @@ jobs:
       - uses: sfdx-actions/setup-pmd@v1
       - name: 'install package for commits'
         run: |
-         npm install --save -g sfdc-git-package
+         npm install -g sfdc-git-package
          sfdx plugins:install sfdx-git-delta | echo 'y'
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
