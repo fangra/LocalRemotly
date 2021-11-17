@@ -36,7 +36,6 @@ jobs:
         run: |
             npm cache clear --force
             npm install -g sfdc-git-package
-            npm audit fix --force
             npm -v
             sfdx plugins --core
       # sfdx sgd:source:delta -h
