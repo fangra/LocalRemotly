@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2    
       - uses: sfdx-actions/setup-pmd@v1
+      - name: 'generate commite package'
+        run: |
+         npm install --save -g sfdc-git-package
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
         run: |
@@ -25,13 +28,22 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
-      - name : 'verification Git'
+      - name : 'test commit to package.xml'
         run : |
           git --version
           echo  ${{ github.event.pull_request.base.sha }}
           echo ${{ github.sha }}
       - name: 'testing'
-        run: git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
+        run:  git diff 'DevHub' 'master' -- ./force-app | echo 'y' 
+ 
+        #  git diff --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > build/DIFF
+        #            sgp -h sgp --from ${{ github.event.pull_request.base.sha }} --output ./package
+        #   git diff master | force push -f 
+        # git diff DevHub --name-only --diff-filter=ACM | force push -f 
+        #  git diff GHS master -- ./force-app echo 'y' | sfdx plugins:install sfdx-git-delta  echo 'y' | sfdx sgp:source:delta
+        #  git rev-list --max-parents=0 HEAD
+        #  git rev-list ed715092ab8f2856a2a82b1ae80083613294be83
+        # sgp --from "ed715092ab8f2856a2a82b1ae80083613294be83" --output ./data
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
