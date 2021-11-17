@@ -17,7 +17,6 @@ jobs:
         with:
          node-version: '14'
       - run: npm install
-      - run: npm test
       - uses: sfdx-actions/setup-pmd@v1
       # Review Source code use --failOnViolation false to bypass the fail
       - name: 'Review Source Code'
