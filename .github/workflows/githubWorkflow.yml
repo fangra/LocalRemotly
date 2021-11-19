@@ -45,18 +45,18 @@ jobs:
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
-      - name: Create scratch org
-        run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
-      - name: Password generation !
-        run: "sfdx force:user:password:generate --targetusername soenv"
+   #   - name: Create scratch org
+     #   run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
+   #   - name: Password generation !
+    #    run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
-      - name: Push source
-        run: "sfdx force:source:push -u soenv"
+    #  - name: Push source
+   #     run: "sfdx force:source:push -u soenv"
       - name: 'List orgs'
         run: "sfdx force:org:list"
         # run tests 
-      - name: 'Run tests'
-        run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
+  #    - name: 'Run tests'
+  #      run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
       - name: 'Get scratch Org URL'
         id: out-cache
         run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
@@ -66,6 +66,8 @@ jobs:
         run: |
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
+          echo ::set-output name=base::$(echo $GITHUB_BASE_REF)
+          echo ::set-output name=head::$(echo $GITHUB_HEAD_REF)
           echo ::set-output name=instanceURL::$(echo $orgCreateResult | jq -r .result.instanceUrl)
           echo ::set-output name=accessToken::$(echo $orgCreateResult | jq -r .result.accessToken)
           echo ::set-output name=parameters::'/secur/frontdoor.jsp?sid='
@@ -83,8 +85,8 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: DevHub
-          target_branch: master
+          from_branch:  ${{steps.params.outputs.head}}
+          target_branch:  ${{steps.params.outputs.base}}
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
