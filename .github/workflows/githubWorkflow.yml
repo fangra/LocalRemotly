@@ -30,7 +30,9 @@ jobs:
         run: |
          echo 'y' | sfdx plugins:install sfdx-git-delta -g
       - name : 'Check installed plugins'
-        run: sfdx plugins --core
+        run: |
+          sfdx plugins --core
+          sfdx sgd:source:delta --help
       - name : 'Create packages '
         run: |
          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output . --generate-delta
