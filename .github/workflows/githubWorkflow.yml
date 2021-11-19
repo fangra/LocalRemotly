@@ -28,8 +28,7 @@ jobs:
           sfdx update
       - name: 'install package for commits'
         run: |
-         sfdx plugins:install sfdx-git-delta 
-         echo y
+         echo 'y' | sfdx plugins:install sfdx-git-delta 
          sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "."
          sfdx plugins --core
       # Runs a set of commands using the runners shell
