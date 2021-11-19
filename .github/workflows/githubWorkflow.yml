@@ -26,6 +26,7 @@ jobs:
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install --global
           sfdx update
+          sfdx --version
       - name: 'install package for commits'
         run: |
          echo 'y' | sfdx plugins:install sfdx-git-delta -g
