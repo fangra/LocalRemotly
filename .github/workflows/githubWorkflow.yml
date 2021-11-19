@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    environment: WF_ENV  # the enviroment variable, with the secrets. 
+    environment: WF_ENV  # the enviroment variable, with the secrets
     runs-on: ubuntu-latest
 
     steps:
