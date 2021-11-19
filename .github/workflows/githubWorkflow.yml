@@ -45,18 +45,18 @@ jobs:
         env:
          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
          USERNAME: ${{ secrets.USERNAME }}
-   #   - name: Create scratch org
-     #   run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
-   #   - name: Password generation !
-    #    run: "sfdx force:user:password:generate --targetusername soenv"
+      - name: Create scratch org
+        run: "sfdx force:org:create  --setdefaultusername -f config/project-scratch-def.json -a my-scratch --setalias soenv"
+      - name: Password generation !
+        run: "sfdx force:user:password:generate --targetusername soenv"
         # push source into scratch org
-    #  - name: Push source
-   #     run: "sfdx force:source:push -u soenv"
+      - name: Push source
+        run: "sfdx force:source:push -u soenv"
       - name: 'List orgs'
         run: "sfdx force:org:list"
         # run tests 
-  #    - name: 'Run tests'
-  #      run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
+      - name: 'Run tests'
+        run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
       - name: 'Get scratch Org URL'
         id: out-cache
         run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
