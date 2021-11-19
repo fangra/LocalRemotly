@@ -32,7 +32,8 @@ jobs:
       - name : 'Check installed plugins'
         run: sfdx plugins --core
       - name : 'Create packages '
-        run: sfdx sgd:source:delta --to DevHub --from origin/master --output .
+        run: |
+         sfdx sgd:source:delta --to master --from DevHub --output .
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
