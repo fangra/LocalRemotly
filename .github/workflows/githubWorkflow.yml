@@ -83,8 +83,8 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: $GITHUB_HEAD_REF
-          target_branch: $GITHUB_BASE_REF
+          from_branch: DevHub
+          target_branch: master
           github_token: ${{ github.token }}
        # Convert into metadata 
       - name: 'Convert Metadata'
