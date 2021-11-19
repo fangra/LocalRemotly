@@ -28,7 +28,7 @@ jobs:
            ./sfdx-cli/install
            npm install sfdx-git-delta@latest -g       
            git --no-pager diff --name-status DevHub  origin/master
-           sgd --to DevHub  --from origin/master --repo . --output .
+           sgd --to "DevHub"  --from "origin/master" --repo . --output .
     # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
