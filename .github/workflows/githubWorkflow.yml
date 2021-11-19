@@ -37,6 +37,7 @@ jobs:
       - name : 'Create packages '
         run: |
          echo $(git rev-list  --max-parents=0 HEAD)
+         git fetch --all
          sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta --loglevel=debug
     # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
