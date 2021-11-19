@@ -33,7 +33,7 @@ jobs:
         run: sfdx plugins --core
       - name : 'Create packages '
         run: |
-         sfdx sgd:source:delta --to DevHub --from master  --output .
+         sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output .
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
