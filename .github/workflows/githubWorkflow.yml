@@ -28,15 +28,12 @@ jobs:
           sfdx update
       - name: 'install package for commits'
         run: |
-         npm install sfdx-git-delta@latest -g
-        # echo 'y' | sfdx plugins:install sfdx-git-delta 
+         echo 'y' | sfdx plugins:install sfdx-git-delta 
       - name : 'Check installed plugins'
         run: sfdx plugins --core
       - name : 'Create packages '
         run: |
-         sgd --to DevHub --from origin/master --repo . --output .
-
-        # sfdx sgd:source:delta --to master --from DevHub --output .
+         sfdx sgd:source:delta --to "master" --from "DevHub" --output .
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
