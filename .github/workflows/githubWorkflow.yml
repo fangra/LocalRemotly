@@ -104,7 +104,7 @@ jobs:
       # Run a check only test pre deployment -x for Package.xml
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org 
-      # Run deployment
+      # Run deployment change source
       - name: 'Run deploy success'
         run: "sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests -u hub-org"
       # Run deployment report
