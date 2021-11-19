@@ -22,6 +22,15 @@ jobs:
       - name: 'Install Salesforce CLI and update'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+          export SFDX_AUTOUPDATE_DISABLE=false
+          export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
+          export SFDX_DOMAIN_RETRY=300
+          export SFDX_DISABLE_APP_HUB=true
+          export SFDX_LOG_LEVEL=DEBUG
+          mkdir sfdx
+          wget -qO- $URL | tar xJ -C sfdx --strip-components 1
+          "./sfdx/install"
+          export PATH=./sfdx/$(pwd):$PATH
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
@@ -32,7 +41,7 @@ jobs:
       - name : 'Check installed plugins'
         run: sfdx plugins --core
       - name : 'Create packages '
-        run: sfdx sgd:source:delta --help
+        run: sfdx sgd:source:delta --to HEAD --from HEAD^ --output .
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
