@@ -66,8 +66,8 @@ jobs:
         run: |
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
-          echo ::set-output name=base::$(echo GITHUB_BASE_REF)
-          echo ::set-output name=head::$(echo GITHUB_HEAD_REF)
+          echo ::set-output name=base::$(echo $GITHUB_BASE_REF)
+          echo ::set-output name=head::$(echo $GITHUB_HEAD_REF)
           echo ::set-output name=instanceURL::$(echo $orgCreateResult | jq -r .result.instanceUrl)
           echo ::set-output name=accessToken::$(echo $orgCreateResult | jq -r .result.accessToken)
           echo ::set-output name=parameters::'/secur/frontdoor.jsp?sid='
