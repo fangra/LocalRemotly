@@ -33,7 +33,7 @@ jobs:
         run: sfdx plugins --core
       - name : 'Create packages '
         run: |
-         sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output .
+         sfdx sgd:source:delta --from commit --source force-app/
       # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
