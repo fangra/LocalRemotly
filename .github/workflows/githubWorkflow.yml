@@ -28,7 +28,7 @@ jobs:
           sfdx update
       - name: 'install package for commits'
         run: |
-         echo 'y' | sfdx plugins:install sfdx-git-delta 
+         echo 'y' | sfdx plugins:install sfdx-git-delta -g
       - name : 'Check installed plugins'
         run: sfdx plugins --core
       - name : 'Create packages '
