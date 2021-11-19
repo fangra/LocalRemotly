@@ -35,7 +35,7 @@ jobs:
           sfdx sgd:source:delta --help
       - name : 'Create packages '
         run: |
-         sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output . --generate-delta
+         sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD) -s=/force-app --output . --generate-delta
     # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
