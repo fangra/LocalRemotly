@@ -19,12 +19,13 @@ jobs:
         run: |
          pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text -failOnViolation false
       # Salesforce CLI Installation.
-      - name: 'Install Salesforce CLI'
+      - name: 'Install Salesforce CLI and update'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
           ./sfdx-cli/install
+          sfdx update
       - name: 'install package for commits'
         run: |
          sfdx plugins:install sfdx-git-delta 
