@@ -36,6 +36,10 @@ jobs:
           sfdx sgd:source:delta --help
       - name : 'Create packages '
         run: |
+         echo $GITHUB_BASE_REF
+         echo $GITHUB_HEAD_REF
+         echo ::set-output name=base::$(echo $GITHUB_BASE_REF)
+         echo ::set-output name=head::$(echo $GITHUB_HEAD_REF)
          echo $(git rev-list  --max-parents=0 HEAD)
          git fetch --all
          sfdx sgd:source:delta --to origin/DevHub --from origin/master --output .
