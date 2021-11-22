@@ -19,19 +19,33 @@ jobs:
         run: |
          pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text -failOnViolation false
       # Salesforce CLI Installation.
-      - name: 'Install Salesforce CLI'
+      - name: 'Install Salesforce CLI and update'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 
-          ./sfdx-cli/install
+          ./sfdx-cli/install --global
+          sfdx update
+          sfdx --version
       - name: 'install package for commits'
         run: |
-         sfdx plugins:install sfdx-git-delta 
-         echo y
-         sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "."
-         sfdx plugins --core
-      # Runs a set of commands using the runners shell
+         echo 'y' | sfdx plugins:install sfdx-git-delta -g
+      - name : 'Check installed plugins'
+        run: |
+          sfdx plugins --core
+          sfdx sgd:source:delta --help
+      - name : 'Create packages '
+        run: |
+         echo $(git rev-list  --max-parents=0 HEAD)
+         git fetch --all
+         sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta
+      - name : 'Display manifest '
+        run: |
+         echo '------- changes -----------'
+         cat package/package.xml
+         echo '-------Destructive changes -----------'
+         cat destructiveChanges/destructiveChanges.xml
+  # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
          DECRYPTION_KEY: ${{ secrets.DECRYPTION_KEY }}
@@ -94,7 +108,7 @@ jobs:
       # Run a check only test pre deployment -x for Package.xml
       - name: 'Run Test on Metadata'
         run: sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org 
-      # Run deployment
+      # Run deployment change source
       - name: 'Run deploy success'
         run: "sfdx force:mdapi:deploy --wait 62 --deploydir=convert --testlevel=RunLocalTests -u hub-org"
       # Run deployment report
