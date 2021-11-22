@@ -37,8 +37,9 @@ jobs:
       - name : 'Create packages '
         run: |
          echo $(git rev-list  --max-parents=0 HEAD)
+         git fetch --all
          sfdx sgd:source:delta --to DevHub --from $(git merge-base DevHub master) --output .
-     #    git fetch --all
+     #    
      # sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta
       - name : 'Display manifest '
         run: |
