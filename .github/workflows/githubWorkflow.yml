@@ -38,13 +38,9 @@ jobs:
         run: |
          echo $GITHUB_BASE_REF
          echo $GITHUB_HEAD_REF
-         echo ::set-output name=base::$(echo $GITHUB_BASE_REF)
-         echo ::set-output name=head::$(echo $GITHUB_HEAD_REF)
-         echo ${{steps.params.outputs.head}}
-         echo ${{steps.params.outputs.base}}
          echo $(git rev-list  --max-parents=0 HEAD)
          git fetch --all
-         sfdx sgd:source:delta --to origin/&${{steps.params.outputs.head}}--from origin/&${{steps.params.outputs.head}} --output .
+         sfdx sgd:source:delta --to origin/$GITHUB_HEAD_REF --from origin/$GITHUB_BASE_REF --output .
 #    sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta
       - name : 'Display manifest '
         run: |
