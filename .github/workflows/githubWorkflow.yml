@@ -40,7 +40,11 @@ jobs:
          git fetch --all
          sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta
       - name : 'Display manifest '
-        run: cat package/package.xml
+        run: |
+         echo '------- changes -----------'
+         cat package/package.xml
+         echo '-------Destructive changes -----------'
+         cat destructiveChanges/destructiveChanges.xml
   # Runs a set of commands using the runners shell
       - name: 'Decrypt server file'
         env:
