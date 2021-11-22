@@ -38,7 +38,8 @@ jobs:
         run: |
          echo $(git rev-list  --max-parents=0 HEAD)
          git fetch --all
-         sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta
+         sfdx sgd:source:delta --to "HEAD" --from "HEAD^" --output "." --generate-delta
+     # sfdx sgd:source:delta --from $(git rev-list  --max-parents=0 HEAD)  --output . --generate-delta
       - name : 'Display manifest '
         run: |
          echo '------- changes -----------'
