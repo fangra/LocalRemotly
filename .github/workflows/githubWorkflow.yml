@@ -4,7 +4,7 @@ on:
   pull_request:
    branches:
     - DevHub
-
+    - master
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
         run: |
          pmd -d "./force-app/main/default/classes" -R "rulesets/apex/quickstart.xml" -f text -failOnViolation false
       # Salesforce CLI Installation.
-      - name: 'Install Salesforce CLI and update'
+      - name: 'Install and Update Sfdx, sfdx plugin'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
           mkdir sfdx-cli
@@ -27,9 +27,7 @@ jobs:
           ./sfdx-cli/install --global
           sfdx update
           sfdx --version
-      - name: 'install package for commits'
-        run: |
-         echo 'y' | sfdx plugins:install sfdx-git-delta -g
+          echo 'y' | sfdx plugins:install sfdx-git-delta -g
       - name : 'Check installed plugins'
         run: |
           sfdx plugins --core
@@ -76,7 +74,7 @@ jobs:
         run: "sfdx force:apex:test:run -u soenv  --resultformat human" 
       - name: 'Get scratch Org URL'
         id: out-cache
-        run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u soenv)
+        run: echo ::set-output name=orgCreateResult::$(sfdx force:org:display --json -u hub-org)
         # get URL and params of scratch org
       - name: 'Get Scratch URL'
         id: params
