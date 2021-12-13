@@ -3,7 +3,7 @@ name: "sfdx"
 on:
   pull_request:
    branches:
-    - master
+    - DevHub
 
 
 jobs:
